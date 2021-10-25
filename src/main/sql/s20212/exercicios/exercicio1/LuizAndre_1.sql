@@ -20,7 +20,7 @@ insert into pessoa values ('nome2', 'endereco2');
 insert into pessoa values ('nome3', 'endereco3');
 
 --
--- Programaaaas
+-- Programas
 --
 select * from pessoa;
 
