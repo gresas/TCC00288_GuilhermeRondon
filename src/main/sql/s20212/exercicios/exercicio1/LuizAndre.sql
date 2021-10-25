@@ -24,6 +24,6 @@ insert into pessoa values ('nome3', 'endereco3');
 --
 select * from pessoa;
 
-create or replace MATERIALIZED view view_pessoa as select * from pessoa where endereco > 'endereco1';
+--create or replace MATERIALIZED view view_pessoa as select * from pessoa where endereco > 'endereco1';
 
 select * from view_pessoa where endereco > 'endereco2';
