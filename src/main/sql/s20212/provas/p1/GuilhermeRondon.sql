@@ -130,7 +130,7 @@ insert into escolha values (5,1,1,2);
 insert into escolha values (5,1,2,1);
 insert into escolha values (5,1,3,1);
 
-CREATE OR REPLACE FUNCTION format(pergunta_ int, respostas int[], totalRespostas int) RETURNS float[] AS $$
+CREATE OR REPLACE FUNCTION get_result(pergunta_ int, respostas int[], totalRespostas int) RETURNS float[] AS $$
     DECLARE
         respostaFinal float[];
     BEGIN
@@ -158,11 +158,11 @@ RETURNS TABLE(pergunta_ int, histograma float[])AS $$
             FOR currentChoice IN SELECT * FROM escolha WHERE pesquisa = p_research AND pergunta = currQuestion.numero LOOP
                 aux[currentChoice.resposta] := aux[currentChoice.resposta] + 1;
             END LOOP;
-            RETURN QUERY SELECT currQuestion.numero, format(currQuestion.numero, aux, answerCount);
+            RETURN QUERY SELECT currQuestion.numero, get_result(currQuestion.numero, aux, answerCount);
         END LOOP;
         RETURN;
     END;
 $$
 LANGUAGE PLPGSQL;
 
-SELECT * FROM resultado(1, ARRAY[ 'Tijuca', 'Centro', 'Lagoa', 'Icaraí', 'São Domingos', 'Santa Rosa', 'Moema', 'Jardim Paulista', 'Higienópolis'] ,ARRAY[ 'Rio de Janeiro', 'Niteroi', 'Sao Paulo']);
+SELECT * FROM resultado(1, ARRAY[ 'Tijuca'] ,ARRAY[ 'Rio de Janeiro', 'Sao Paulo']);
